@@ -64,7 +64,7 @@ module.exports = {
              },
              auto_return: "approved",
              external_reference: "fedegarcia222@gmail.com",
-             notification_url: "https://kornis-mercado-pago-cert.herokuapp.com/notifications"
+             notification_url: "https://kornis-mercado-pago-cert.herokuapp.com/notifications?source_news=webhooks"
         }
 
         mercadopago.preferences.create(preferenceObj)
@@ -93,7 +93,7 @@ module.exports = {
             let body = "";
             req.on("data", function(buffer){
                body += buffer.toString();
-            })
+            });
             req.on("end", function(){
                 let response = JSON.parse(body);
                 console.log(response);
