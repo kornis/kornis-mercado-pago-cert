@@ -63,7 +63,8 @@ module.exports = {
                  failure: "https://kornis-mercado-pago-cert.herokuapp.com/failure"
              },
              auto_return: "approved",
-             external_reference: "fedegarcia222@gmail.com"
+             external_reference: "fedegarcia222@gmail.com",
+             notification_url: "https://kornis-mercado-pago-cert.herokuapp.com/notifications"
         }
 
         mercadopago.preferences.create(preferenceObj)
@@ -85,5 +86,21 @@ module.exports = {
     
     failure:(req, res) => {
         return res.render("failure")
+    },
+    notifications: (req,res) => {
+
+        if(req.method == "POST"){
+            let body = "";
+            req.on("data", function(buffer){
+               body = buffer.toString();
+            })
+            req.on("end", function(){
+                let response = JSON.parse(body);
+                console.log(response);
+                res.status(200).end("Payment ok");
+            })
+        }else{
+            res.status(400).end("payment error")
+        }
     }
 }

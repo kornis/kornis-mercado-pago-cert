@@ -13,4 +13,7 @@ router.get('/success', indexController.success);
 router.get('/pending', indexController.pending);
 router.get('/failure', indexController.failure);
 
+//webhook
+router.post("/notifications", indexController.notifications);
+
 module.exports = router;
