@@ -92,15 +92,15 @@ module.exports = {
         if(req.method == "POST"){
             let body = "";
             req.on("data", function(buffer){
-               body = buffer.toString();
+               body += buffer.toString();
             })
             req.on("end", function(){
                 let response = JSON.parse(body);
                 console.log(response);
-                res.status(200).end("Payment ok");
+               return res.status(200).end("Payment ok");
             })
         }else{
-            res.status(400).end("payment error")
+           return res.status(400).end("payment error")
         }
     }
 }
