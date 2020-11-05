@@ -22,7 +22,8 @@ module.exports = {
                     title: req.query.title,
                     picture_url: req.query.img,
                     description: "Calzado con muucha facha",
-                    quantity: 1
+                    quantity: 1,
+                    unit_price: Number(req.query.price)
                 }
              ],
              payer: {
@@ -31,7 +32,7 @@ module.exports = {
                  email: "test_user_63274575@testuser.com",
                  phone: {
                      area_code: "11",
-                     number: "55556666"
+                     number: 55556666
                  },
                  address: {
                      zip_code: "1234",
