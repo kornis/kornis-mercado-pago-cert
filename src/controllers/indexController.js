@@ -89,7 +89,13 @@ module.exports = {
     },
     notifications: (req,res) => {
         console.log(req.body);
-        return res.status(200).end("All Ok")
+
+        switch(req.body.type){
+            case "test":
+                return res.status(200).end("All Ok");
+            default:
+                return res.status(500).end("Error");
+        }
         /*
         if (req.method === "POST") {
             let body = "";
