@@ -88,19 +88,36 @@ module.exports = {
         return res.render("failure")
     },
     notifications: (req,res) => {
-        console.log(req.method);
-        if(req.method == "POST"){
+        if (req.method === "POST") {
             let body = "";
-            req.on("data", function(buffer){
-               body += buffer.toString();
+            req.on("data", (chunk) => {
+              body += chunk.toString();
             });
-            req.on("end", function(){
-                let response = JSON.parse(body);
-                console.log(response);
-               return res.status(200).end("Payment ok");
-            })
-        }else{
-           return res.status(400).end("payment error")
-        }
+            req.on("end", () => {
+              let bodyParsed = JSON.parse(body);
+              console.log(body);
+              switch (bodyParsed.type) {
+                case "payment":
+                  return res.status(200).end("Payment created");
+                  break;
+                case "plan":
+                  return res.status(200).end("Plan created"); 
+                  break;
+                case "subscription":
+                  return res.status(200).end("Subscription created");
+                  break;
+                case "invoice":
+                  return res.status(200).end("Invoice created");
+                  break;
+                case "test":
+                  return res.status(200).end("TEST");
+                default:
+                  return res.status(400).end("TYPE NOT FOUND");
+                  break;
+              }
+            });
+          } else {
+            return res.status(500).end("BAD REQUEST");
+          }
     }
 }
