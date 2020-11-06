@@ -88,7 +88,7 @@ module.exports = {
         return res.render("failure")
     },
     notifications: (req,res) => {
-
+        console.log(req.method);
         if(req.method == "POST"){
             let body = "";
             req.on("data", function(buffer){
