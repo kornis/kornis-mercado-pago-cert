@@ -88,15 +88,18 @@ module.exports = {
         return res.render("failure")
     },
     notifications: (req,res) => {
-        console.log("lleguE")
+        console.log(req.body);
+        return res.status(200).end("All Ok")
+        /*
         if (req.method === "POST") {
             let body = "";
             req.on("data", (chunk) => {
               body += chunk.toString();
             });
+
             req.on("end", () => {
               let bodyParsed = JSON.parse(body);
-              console.log(body);
+             
               switch (bodyParsed.type) {
                 case "payment":
                   return res.status(200).end("Payment created");
@@ -119,6 +122,6 @@ module.exports = {
             });
           } else {
             return res.status(500).end("BAD REQUEST");
-          }
+          }*/
     }
 }
