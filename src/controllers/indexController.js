@@ -88,6 +88,7 @@ module.exports = {
         return res.render("failure")
     },
     notifications: (req,res) => {
+        console.log("lleguE")
         if (req.method === "POST") {
             let body = "";
             req.on("data", (chunk) => {
